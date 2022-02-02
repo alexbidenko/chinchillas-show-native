@@ -1,0 +1,443 @@
+@import url("https://fonts.googleapis.com/css?family=Mukta:700");
+
+a.learn-more {
+  font-family    : "Mukta", sans-serif;
+  font-size      : 1rem;
+  line-height    : 1.5;
+  position       : relative;
+  display        : inline-block;
+  cursor         : pointer;
+  outline        : none;
+  border         : 0;
+  vertical-align : middle;
+  text-decoration: none;
+  background     : transparent;
+  padding        : 0;
+  font-size      : inherit;
+  font-family    : inherit;
+  width          : 24rem;
+  height         : 4rem;
+  margin-top     : 40px;
+}
+a.learn-more .circle {
+  transition   : all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+  position     : relative;
+  margin       : 0;
+  width        : 3rem;
+  height       : 3rem;
+  background   : #0387A6;
+  border-radius: 1.625rem;
+}
+a.learn-more .circle .icon {
+  transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+  position  : absolute;
+  top       : 0;
+  bottom    : 0;
+  margin    : auto;
+  background: #fff;
+}
+a.learn-more .circle .icon.arrow {
+  transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+  left      : 0.625rem;
+  width     : 1.125rem;
+  height    : 0.125rem;
+  background: none;
+}
+a.learn-more .circle .icon.arrow::before {
+  position    : absolute;
+  content     : "";
+  top         : -0.25rem;
+  right       : 0.0625rem;
+  width       : 0.625rem;
+  height      : 0.625rem;
+  border-top  : 0.125rem solid #fff;
+  border-right: 0.125rem solid #fff;
+  transform   : rotate(45deg);
+}
+a.learn-more .a-text {
+  transition    : all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+  position      : absolute;
+  top           : 0;
+  left          : 0;
+  right         : 0;
+  bottom        : 0;
+  padding       : 0.75rem 0;
+  margin        : 0 0 0 1.85rem;
+  color         : #0387A6;
+  font-weight   : 700;
+  line-height   : 1.6;
+  text-align    : center;
+  text-transform: uppercase;
+}
+a.learn-more:hover .circle {
+  width: 100%;
+}
+a.learn-more:hover .circle .icon.arrow {
+  background: #fff;
+  transform : translate(1rem, 0);
+}
+a.learn-more:hover .a-text {
+  color: #fff;
+}
+
+body {
+    overflow-x: hidden;
+}
+#img_to_redact {
+    width     : 100%;
+    background: url('../../Datas/site/to_redact_image.jpeg') no-repeat center / cover;
+    height    : 300px;
+}
+.top-block {
+    padding-top   : 80px;
+    padding-bottom: 80px;
+}
+.top-item-text {
+    display         : block;
+    width           : 100%;
+    font-size       : 16px;
+    font-weight     : 200;
+    background-color: rgba(8, 208, 255, 0.8);
+}
+.top-item-text-left {
+    padding-right: 15px;
+}
+.top-item-text-right {
+    padding-left: 15px;
+}
+.chin-block {
+    padding: 16px;
+}
+.block {
+    border       : 1px solid black;
+    border-radius: 8px;
+    padding      : 24px;
+
+    animation: chin-block-create .3s ease-in-out;
+
+    
+    transition-property: transform, box-shadow;
+    transition-duration: .15s;
+}
+.block:hover {
+    transform : scale(1.02);
+    box-shadow: 0 0 4px rgba(0,0,0,0.5);
+}
+@keyframes chin-block-create {
+    0% {
+        opacity   : 0;
+        transform : scale(0.7);
+        box-shadow: 0 0 4px rgba(0,0,0,0.5);
+    }
+    70% {
+        transform : scale(1.1);
+        box-shadow: 0 0 8px rgba(0,0,0,0.5);
+    }
+    100% {
+        opacity   : 1;
+        transform : scale(1);
+        box-shadow: 0 0 0 rgba(0,0,0,0.5);
+    }
+}
+
+.transform-border {
+  position: relative;
+  margin  : 0 auto;
+}
+    .transform-border {
+        transform: perspective(3000px) rotateY(29deg);
+    }
+
+.transform-border div {
+  display   : block;
+  width     : 100%;
+  box-shadow: -12px 11px 1px #f2f2f2;
+}
+.transform-border:after {
+  content   : "";
+  position  : absolute;
+  width     : 100%;
+  height    : 100%;
+  left      : -22px;
+  top       : 22px;
+  background: #cccccc;
+  z-index   : -1;
+}
+
+.portfolio-item {
+    width  : 300px;
+    padding: 20px;
+}
+.portfolio-item-wrap {
+	position  : relative;
+	overflow  : hidden;
+	text-align: center;
+	box-shadow: 0 0 5px rgba(0, 0, 0, .5);
+	background: black;
+	color     : white;
+}
+.portfolio-item-wrap:hover {
+	box-shadow: 0 0 10px rgba(0, 0, 0, 1);
+}
+.portfolio-item img {
+	display   : block;
+	width     : 100%;
+	opacity   : .75;
+	transition: .3s ease-in-out;
+}
+.portfolio-item-inner {
+	position    : absolute;
+	top         : 45%;
+	left        : 7%;
+	right       : 7%;
+	bottom      : 45%;
+	border      : 1px solid white;
+	border-width: 0 1px 1px;
+	transition  : .25s ease-in-out;
+}
+.portfolio-heading {
+	overflow : hidden;
+	transform: translateY(-50%);
+}
+.portfolio-heading h3 {
+	font-family: 'Pattaya', sans-serif;
+	font-weight: normal;
+	display    : table;
+	margin     : 0 auto;
+	padding    : 0 10px;
+	position   : relative;
+	font-size  : 1.75rem;
+}
+.portfolio-heading h3: before,
+.portfolio-heading h3: after {
+	content   : "";
+	position  : absolute;
+	top       : 50%;
+	width     : 50px;
+	height    : 1px;
+	background: white;
+}
+.portfolio-heading h3:before {
+	left: -50px;
+}
+.portfolio-heading h3:after {
+	right: -50px;
+}
+.portfolio-item-inner p {
+	position  : absolute;
+	top       : 50%;
+	width     : 100%;
+	transform : translateY(-50%);
+	padding   : 0 20px;
+	opacity   : 0;
+	list-style: none;
+	transition: .4s ease-in-out;
+}
+.portfolio-item a {
+	left    : 0;
+	right   : 0;
+	top     : 0;
+	bottom  : 0;
+	position: absolute;
+	z-index : 1;
+}
+.portfolio-item-wrap:hover img {
+	opacity  : 0.45;
+	transform: scale(1.1);
+}
+.portfolio-item-wrap:hover .portfolio-item-inner {
+	top   : 7%;
+	bottom: 7%;
+}
+.portfolio-item-wrap:hover p {
+	opacity         : 1;
+	transition-delay: .3s;
+	font-size       : 18px;
+	font-weight     : 200;
+}
+
+.dbl-border {
+  position: relative;
+  display : table;
+  margin  : 50px auto;
+  width   : 100%;
+}
+.dbl-border img {display: block;}
+.dbl-border: before,
+.dbl-border: after {
+  content : "";
+  position: absolute;
+  z-index : 1;
+  width   : 100%;
+  height  : 100%;
+  border  : 2px solid #40D8EC;
+}
+.dbl-border:before {
+  top : -15px;
+  left: -15px;
+}
+.dbl-border:after {
+  right : -15px;
+  bottom: -15px;
+}
+.image-wrapper {
+  position  : relative;
+  z-index   : 2;
+  padding   : 5px;
+  background: white;
+  box-shadow: 1px 1px 20px 0 rgba(0, 0, 0, 0.1);
+  width     : 100%;
+}
+
+.img_anim_to_redact {
+    transition-property: width, height, top, left;
+    transition-duration: .6s;
+}
+
+.back_href_opacity {
+    position        : fixed;
+    top             : 0;
+    left            : 0;
+    width           : 100%;
+    height          : 100%;
+    z-index         : -10;
+    opacity         : 0;
+    background-color: white;
+
+    transition-property: opacity;
+    transition-duration: .3s;
+}
+.new_page {
+    position  : fixed;
+    left      : 0;
+    width     : 100%;
+    height    : 100%;
+    z-index   : -10;
+    background: linear-gradient(to top left, #b2ebf2, #e1bee7);
+    
+    transition-duration: .4s;
+    transition-property: top;
+}
+
+#profile {
+    /*background: linear-gradient(45deg, #bbbbbb 25%, transparent 25%, transparent 75%, #bbbbbb 75%), linear-gradient(45deg, #bbbbbb 25%, transparent 25%, transparent 75%, #bbbbbb 75%) 0.1875em 0.1875em, radial-gradient(at 50% 0, #ebebeb, #999999);*/
+    background: linear-gradient(to right, #ffffff, #222222);
+    /*background-size: 0.375em 0.375em, 0.375em 0.375em, 100% 100%;*/
+}
+.parallax-container {
+    height: 300px;
+} 
+.parallax {
+    z-index: 0!important;
+}
+.sec-text {
+    padding: 4% 8%;
+    height : auto;
+}
+.title-group-text {
+    position   : absolute;
+    text-shadow: 6px 6px 0px rgba(0,0,0,0.2);
+    font-weight: 700;
+    margin-left: 100px;
+    padding-top: 90px;
+    color      : white;
+    z-index    : 1;
+}
+.empty-group {
+    font-size  : 24px;
+    margin-left: 60px;
+}
+.chins-profile-block {
+    min-height: 160px;
+}
+.chins-profile-title {
+    text-shadow: 6px 6px 0px rgba(0, 0, 0, 0.2);
+    font-weight: 700;
+    margin     : auto;
+    color      : #0387A6;
+}
+@media (orientation:landscape) {
+  .chins-profile-title {
+    font-size: 5rem;
+  }
+  .title-group-text {
+    font-size: 4rem;
+  }
+  a.learn-more {
+    transform: scale(1.2);
+  }
+}
+@media (orientation:portrait) {
+  .chins-profile-title {
+    font-size: 2.4rem;
+  }
+  .title-group-text {
+    font-size: 2.2rem;
+  }
+  a.learn-more {
+    transform: scale(1);
+  }
+}
+#avatar {
+    width     : 100%;
+    height    : 340px;
+    margin    : 0;
+    background: no-repeat center / cover #fff;
+}
+
+nav a:hover {
+  color: white;
+}
+a:hover {
+  text-decoration: none;
+}
+
+section {
+  width     : 100%;
+  height    : 50vh;
+  box-sizing: border-box;
+}
+section.sec1 {
+  background           : url('../../Datas/site/dna-base-img/WhatsApp Image 2019-01-14 at 21.32.26.jpeg') no-repeat center / cover;
+  background-attachment: fixed;
+}
+section.sec2 {
+  background           : url('../../Datas/site/dna-base-img/WhatsApp Image 2019-01-15 at 12.34.27.jpeg') no-repeat center / cover;
+  background-attachment: fixed;
+}
+section.sec3 {
+  background           : url('../../Datas/site/dna-base-img/WhatsApp Image 2019-01-14 at 21.33.49.jpeg')no-repeat center / cover;
+  background-attachment: fixed;
+}
+section.sec4 {
+  background           : url('../../Datas/site/dna-base-img/WhatsApp Image 2019-01-14 at 23.34.11.jpeg')no-repeat center / cover;
+  background-attachment: fixed;
+}
+section.sec5 {
+  background           : url('../../Datas/site/dna-base-img/WhatsApp Image 2019-01-14 at 21.33.32.jpeg')no-repeat center / cover;
+  background-attachment: fixed;
+}
+section.sec6 {
+  background           : url('../../Datas/site/dna-base-img/WhatsApp Image 2019-01-15 at 13.09.35.jpeg')no-repeat center / cover;
+  background-attachment: fixed;
+}
+section.sec7 {
+  background           : url('../../Datas/site/dna-base-img/WhatsApp Image 2019-01-15 at 12.34.57.jpeg')no-repeat center / cover;
+  background-attachment: fixed;
+}
+section.sec8 {
+  background           : url('../../Datas/site/dna-base-img/WhatsApp Image 2019-01-15 at 13.04.50.jpeg')no-repeat center / cover;
+  background-attachment: fixed;
+}
+section.sec9 {
+  background           : url('../../Datas/site/dna-base-img/WhatsApp Image 2019-01-15 at 13.04.51.jpeg')no-repeat center / cover;
+  background-attachment: fixed;
+}
+section.sec10 {
+  background           : url('../../Datas/site/dna-base-img/WhatsApp Image 2019-01-15 at 13.24.54.jpeg')no-repeat center / cover;
+  background-attachment: fixed;
+}
+
+label {
+  font-weight: 400;
+}

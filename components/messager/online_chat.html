@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+    
+    .circle-button {
+        position: fixed;
+        right: 16px;
+        bottom: 24px;
+        width: 56px;
+        height: 56px;
+        border-radius: 50%;
+        background-color: #0387A6;
+        cursor: pointer;
+        z-index: 1;
+        box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 3px 1px -2px rgba(0,0,0,0.12), 0 1px 5px 0 rgba(0,0,0,0.2);
+        
+        transition-property: all;
+        transition-duration: 0.3s;
+        transition-timing-function: ease-out;
+        transition-delay: 0s;
+    }
+    .circle-button i {
+        line-height: 56px;
+        font-size: 1.6rem;
+        color: white;
+        width: inherit;
+        display: inline-block;
+        text-align: center;
+    }
+    .circle-button:hover {
+        background-color: #08D0FF;
+    }
+    @media (max-width: 991.98px) {  /* для разрешения экрана от 470 до 930 пикселей */
+        .chat-view {
+            top: 30px;
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            background-color: white;
+            border: black solid 1px;
+            border-radius: 8px;
+            z-index: 10;
+            display: none;
+        }
+    }
+    @media (min-width: 992px) {  /* для разрешения экрана от 470 до 930 пикселей */
+        .chat-view {
+            position: fixed;
+            width: 300px;
+            height: 433px;
+            background-color: white;
+            bottom: 100px;
+            right: 20px;
+            box-shadow: 0 0 4px 0 black;
+            z-index: 10;
+            display: none;
+        }
+    }
+    
+        .myMessage {
+            max-width: 200px;
+            background-color: #4db6ac55;
+        }
+        .yourMessage {
+            width: 100px;
+            min-height: 30px;
+            border: #212121 solid 1px;
+        }
+        .chat-avatar {
+            width: 100%;
+            height: 55px;
+            border-radius: 50%;
+        }
+    </style>
+    <script type="text/javascript">
+        Vue.component("message", {
+            props: ['message', "user"],
+            template: `<div class="px-3" :class="[(message.user == user) ? 'text-right' : '']">
+                <p :class="[(message.user == user) ? 'myMessage ml-auto mb-1 border border-info d-inline-block px-2 py-1 rounded text-wrap' : 
+                    'yourMessage mb-1 border border-info d-inline-block px-2 py-1 rounded text-wrap']">{{message.message}}</p>
+            </div>`
+        });
+        Vue.component("dialog-item", {
+            props: ['dialog', 'owner'],
+            template: '<button type="button" class="btn btn-light btn-block dialogItem" style="text-align: left;" @click="openDialog(dialog.uri, owner)">{{owner}} | {{dialog.text}}</button>',
+            methods: {
+                openDialog: function (uriAdres, speaker) {
+                    axios.get(uriAdres).then(response => {allMessages.messages = response.data});
+                    allMessages.urimes = uriAdres;
+                    allMessages.speaker = speaker;
+                    $('#allDialogs').css('display', 'none');
+                    $('#thisDialog').css('display', 'block');
+                }
+            }
+        });
+        
+    const openChat = () => {
+        $('.chat-view').slideToggle(600);
+        document.getElementById('scrollChatBlock').scrollTop = 99999;
+    }
+    </script>
+</head>
+<body>
+    <div id="messager" class="container-fluid p-0">
+        <!--div class="row">
+            <div class="col-1 d-block d-lg-none" style="background-color: red;" onClick="openChat()"></div>
+            <h1 class="col-auto">Chat</h1>
+        </div-->
+        <div class="row m-0" style="background-color: #f8f9fa;">
+            <button class="btn btn-light rounded-0">
+                <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+                    <path fill="#000000" d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" />
+                </svg>
+            </button>
+        </div>
+        <div class="row py-2 border-bottom m-0">
+            <div class="col-3 pr-2 py-1 pl-4">
+                <img class="chat-avatar m-0" src="https://pp.userapi.com/c850024/v850024611/112d55/FYFKz7qPKcU.jpg">
+            </div>
+            <div class="col-6">
+                <p class="lead m-0 mt-2 p-0 text-right" style="font-size: 1.5rem;">Александр</p>
+                <hr class="my-1" />
+                <p class="lead m-0 p-0" style="font-size: 1.5rem;">Анна</p>
+            </div>
+            <div class="col-3 pl-2 py-1 pr-4">
+                <img class="chat-avatar m-0" src="https://pp.userapi.com/c846418/v846418875/157bfe/gsxVI9iKJQg.jpg">
+            </div>
+        </div>
+        <div id="thisDialog" v-show="isDialog">
+            <p v-if="isExistMessages" class="lead text-center mt-4 d-none">Нет сообщений</p>
+            <div id="scrollChatBlock" class="py-2" style="overflow: auto; height: 230px; margin: 0 -8px;">
+                <message v-for="(message, index) in messages" :key="index" :message="message" :user="user"></message>
+            </div>
+            <div class="container w-100 p-0 m-0">
+                <div class="row border-top">
+                    <div class="col p-0">
+                        <textarea class="form-control w-100 border-0" style="height: 60px;" id="sended_message" v-model="sended_message" @keyup.enter="sendMessage"></textarea>
+                    </div>
+                    <div class="col-auto p-0">
+                        <button class="btn btn-info p-0 d-block px-1 rounded-0"><i class="material-icons">insert_emoticon</i></button>
+                        <button class="btn btn-info p-0 d-block px-1 rounded-0" @click="sendMessage"><i class="material-icons right">send</i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="allDialogs" style="display: none;">
+            <div id="titleViews" class="btn-block btn-group" role="group" aria-label="Basic example">
+                <button type="button" class="col-6 btn btn-secondary" v-if="isDialog" @click="openThisDialog">Диалог</button>
+                <button type="button" v-bind:class="[isDialog ? 'col-6' : 'col-12', 'btn', 'btn-secondary']" @click="openAllDialogs">Все сообщения</button>
+            </div>
+            <div id="scrollDialogsBlock" style="overflow: auto; height: 200px;">
+                <dialog-item v-for="(dialog, index) in dialogs" v-bind:key="index" v-bind:dialog="dialog" v-bind:owner="key"></dialog-item>
+            </div>
+        </div>
+    </div>
+
+<script type="text/javascript">
+    var allMessages = new Vue({
+        el: "#messager",
+        data: {
+            messages: [],
+            dialogs: [],
+            user: <?= $user['id']; ?>,
+            speaker: <?= $_GET['profile']; ?>,
+            sended_message: ""
+        },
+        computed: {
+            isExistMessages: function () {
+                if (this.messages.length != 0) {
+                    return false;
+                } else return true;
+            },
+            isDialog: function () {
+                return this.user != this.speaker;
+            }
+        },
+        methods: {
+            sendMessage: function () {
+                if (this.sended_message != "") {
+                    this.messages.push({user: this.user, speaker: this.speaker, message: this.sended_message});
+                    //this.dialogs[this.speaker] = this.sended_message;
+                    $.ajax({
+                        url: '../php/updata_messages.php',
+                        type: 'POST',
+                        data: {message: allMessages.sended_message, 
+                               user: allMessages.user, 
+                               speaker: allMessages.speaker, 
+                               login: Cookies.get('login'), 
+                               password: Cookies.get('password')}
+                    });
+                    this.sended_message = "";
+                };
+                setTimeout(function () {
+                    document.getElementById('scrollChatBlock').scrollTop = 99999;
+                }, 300);
+            },
+            openThisDialog: function () {
+                axios.get(urimessages).then(response => {this.messages = response.data});
+                this.urimes = urimessages;
+                this.speaker = profile;
+                $('#allDialogs').css('display', 'none');
+                $('#thisDialog').css('display', 'block');
+            },
+            openAllDialogs: function () {
+                $('#thisDialog').css('display', 'none');
+                $('#allDialogs').css('display', 'block');
+            }
+        },
+        watch: {
+            messages: function (val) {
+                setTimeout(function () {
+                    document.getElementById('scrollChatBlock').scrollTop = 99999;
+                }, 300);
+            }
+        },
+        created () {
+            if(this.user != this.speaker) {
+                $.ajax({
+                    url: '../php/get_messages.php',
+                    data: {what: 'chat', user: this.user, speaker: this.speaker, login: Cookies.get('login'), password: Cookies.get('password')},
+                    type: 'POST',
+                    success: function(data) {
+                        allMessages.messages = JSON.parse(data);
+                    }
+                });
+            }
+
+            $.ajax({
+                url: '../php/get_messages.php',
+                data: {what: 'dialogs', user: this.user, login: Cookies.get('login'), password: Cookies.get('password')},
+                type: 'POST',
+                success: function(data) {
+                    /*data = JSON.parse(data);
+                    let cash = 
+                    for (let i in data) {
+
+                    }
+                    allMessages.dialogs = JSON.parse(data);*/
+                }
+            });
+            /*
+            if (this.urimes != "") {
+                axios.get(this.urimes).then(response => {this.messages = response.data});
+                setInterval(function () {
+                    axios.get(allMessages.urimes).then(response => {
+                        if (allMessages.messages != response.data) {
+                            allMessages.messages = response.data;
+                        }
+                    });
+                }, 15000);
+            };
+            axios.get('../Datas/' + user + '/chats.json').then(response => {this.dialogs = response.data});
+            setInterval(function () {
+                axios.get('../Datas/' + user + '/chats.json').then(response => {
+                    if (allMessages.dialogs != response.data) {
+                        allMessages.dialogs = response.data;
+                    }
+                });
+            }, 20000);
+            if (!this.isDialog) {
+                $('#thisDialog').css('display', 'none');
+                $('#allDialogs').css('display', 'block');
+            }*/
+        }
+    });
+</script>
+</body>
+</html>

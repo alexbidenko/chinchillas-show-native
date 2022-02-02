@@ -1,0 +1,99 @@
+<style type="text/css">
+.navigationButton {
+    width: 100%;
+    text-decoration: none;
+    outline: none;
+    padding: auto 10px;
+    border-radius: 15px;
+    box-shadow: 0 0 40px 40px #08D0FF inset, 0 0 0 0 #08D0FF;
+    background-color: transparent;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 200;
+    font-size: 16px;
+    color: white;
+    transition: .15s ease-in-out;
+}
+.buttonFalsh {
+    height: 30px;
+    border: 1px solid red;
+}
+.navigationButton:hover {
+    box-shadow: 0 0 10px 0 #08D0FF inset, 0 0 10px 4px #08D0FF;
+    color: #0387A6;
+}
+#buttons-show-hide {
+    transition-property: transform;
+    transition-duration: .2s;
+}
+.buttons-show {
+    transform: translate(0, 0);
+}
+.buttons-hide {
+    transform: translate(0, -50px);
+}
+</style>
+
+<div id="buttons-control" class="container-fluid position-fixed d-none d-lg-block" style="z-index: 10;">
+    <div class="row" id="buttons-show-hide">
+        <div class="col-6 col-lg-2 p-4">
+            <button class="navigationButton" onClick='location.href="/"'>Главная</button>
+        </div>
+        <div class="col-6 col-lg-2 p-4">
+            <button class="navigationButton" onClick='location.href="dna-base.php"'>Мой профиль</button>
+        </div>
+        <div class="col-6 col-lg-2 p-4">
+            <button class="navigationButton" onClick='location.href="search-user.php"'>Люди</button>
+        </div>
+        <div class="col-6 col-lg-2 p-4">
+            <button class="navigationButton" onClick='location.href="search-chin.php"'>Шиншиллы</button>
+        </div>
+        <div class="col-6 col-lg-2 p-4">
+            <button class="navigationButton" onClick='location.href="calculator.php"'>Калькулятор</button>
+        </div>
+        <div class="col-6 col-lg-2 p-4">
+            <button class="navigationButton" onClick='location.href="php/exit.php"'>Выход</button>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="btn-group position-fixed d-block d-lg-none btn-block" style="padding: 0; z-index: 10;" role="group" aria-label="Button group with nested dropdown">
+  <button type="button" class="btn btn-secondary btn-lg col-4" onClick='location.href="/"'>Главная</button>
+  <button type="button" class="btn btn-secondary btn-lg col-4" onClick='location.href="dna-base.php"'>Мой профиль</button>
+
+  <div class="btn-group col-4" style="padding: 0; top: 0;" role="group">
+    <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle btn-lg btn-block" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Меню
+    </button>
+    <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+      <a class="dropdown-item btn-lg" onClick='location.href="search-user.php"'>Люди</a>
+      <a class="dropdown-item btn-lg" onClick='location.href="search-chin.php"'>Шиншиллы</a>
+      <a class="dropdown-item btn-lg" onClick='location.href="calculator.php"'>Калькулятор</a>
+      <a class="dropdown-item btn-lg" onClick='location.href="php/exit.php"'>Выход</a>
+      <a class="dropdown-item btn-lg" onClick="openChat()">Чат</a>
+    </div>
+  </div>
+</div>
+
+<div class="btn-group d-block d-lg-none btn-block" style="padding: 0; margin: 0;" role="group" aria-label="Button group with nested dropdown">
+  <button type="button" class="btn btn-secondary btn-lg col-4">Главная</button>
+  <button type="button" class="btn btn-secondary btn-lg col-4">Мой профиль</button>
+  <button type="button" class="btn btn-secondary btn-lg col-4">Мой профиль</button>
+</div>
+
+<script type="text/javascript">
+$(window).scroll(function() {
+    if($(window).scrollTop() != 0) {
+        $('#buttons-show-hide').addClass('buttons-hide');
+        $('#buttons-show-hide').removeClass('buttons-show');
+    } else {
+        $('#buttons-show-hide').addClass('buttons-show');
+        $('#buttons-show-hide').removeClass('buttons-hide');
+    }
+});
+$('#buttons-control').mouseover(function() {
+    $('#buttons-show-hide').addClass('buttons-show');
+    $('#buttons-show-hide').removeClass('buttons-hide');
+});
+</script>

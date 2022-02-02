@@ -1,0 +1,24 @@
+php_value default_charset utf-8 
+AddType 'text/html; charset=utf-8' .html .htm .shtml
+
+DirectoryIndex index.html index.php
+
+AddType application/x-httpd-php .php .html .css
+
+ErrorDocument 401 https://chinchillas-show.com/no-page.php
+ErrorDocument 403 https://chinchillas-show.com/no-page.php
+ErrorDocument 404 https://chinchillas-show.com/no-page.php
+
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^([^\.]+)$ $1.php [NC,L]
+
+RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /index\.php\ HTTP/ 
+RewriteRule ^index\.php$ https://chinchillas-show.com/ [R=301,L] 
+
+RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /index\.php\ HTTP/ 
+RewriteRule ^index\.php$ https://chinchillas-show.com/dna-base [R=301,L] 
+
+RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /index\.php\ HTTP/ 
+RewriteRule ^index\.php$ https://chinchillas-show.com/race [R=301,L] 
